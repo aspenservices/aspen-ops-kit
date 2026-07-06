@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Aspen OPS Kit · Línea de Agua — Live Demo</title>
+<link rel="stylesheet" href="ops.css">
+<script src="ops.js" defer></script>
+<style>
+  /* demo-only layout helpers */
+  .wrap{position:relative;z-index:1;max-width:1100px;margin:0 auto;padding:28px 26px}
+  .demo-sec{margin-bottom:26px}
+  .demo-h{font-family:var(--ops-mono);font-size:10px;color:var(--ops-copper-t);letter-spacing:3px;margin-bottom:12px}
+  .grid2{display:grid;grid-template-columns:1.6fr 1fr;gap:14px}
+  @media(max-width:760px){.grid2{grid-template-columns:1fr}}
+  .swatches{display:flex;gap:10px;flex-wrap:wrap}
+  .sw{width:120px;border-radius:12px;overflow:hidden;border:1px solid var(--ops-border)}
+  .sw i{display:block;height:52px}
+  .sw b{display:block;font-family:var(--ops-mono);font-size:8.5px;font-weight:400;color:var(--ops-text2);padding:7px 9px;letter-spacing:.5px}
+  .btnrow{display:flex;gap:9px;flex-wrap:wrap}
+  code{font-family:var(--ops-mono);font-size:10px;color:var(--ops-aqua-t);background:rgba(79,195,217,.08);padding:2px 7px;border-radius:5px}
+</style>
+</head>
+<body class="ops" style="--accent:var(--ops-aqua);--accent-t:var(--ops-aqua-t)">
+
+<!-- Ambient bubbles behind everything -->
+<div class="ops-bubbles"></div>
+
+<div class="wrap">
+
+  <!-- ═══ Header + Waterline (signature) ═══ -->
+  <div class="ops-hdr">
+    <span class="ops-brand">Aspen <em>OPS</em> Kit</span>
+    <span class="ops-role">Design System · v1.0</span>
+    <div class="ops-hdr-right">
+      <span class="ops-live"><span class="ops-dot"></span> LÍNEA DE AGUA</span>
+      <span class="ops-clock" id="clock">—</span>
+    </div>
+  </div>
+  <div class="ops-waterline"></div>
+
+  <!-- ═══ Briefing ═══ -->
+  <div class="ops-brief ops-rise">
+    <div class="ops-brief-t">EXECUTIVE BRIEFING <span class="ops-ai">COMPONENT · .ops-brief</span></div>
+    <div class="ops-brief-b">
+      Este es el <b class="q">Aspen OPS Kit</b>: un solo CSS + JS que da a cada app del ecosistema la
+      identidad <b class="c">Línea de Agua</b> y sus efectos acuáticos. Una app entera se une con
+      <b>2 líneas</b> en su <code>&lt;head&gt;</code> y cambia su acento con <b>1 variable</b>.
+      Haz <b class="g">click en cualquier botón</b> para sentir el agua. 💧
+    </div>
+  </div>
+
+  <!-- ═══ KPIs ═══ -->
+  <div class="demo-sec">
+    <div class="demo-h">KPI STRIP · .ops-kpis — hover para el acento inferior</div>
+    <div class="ops-kpis">
+      <div class="ops-kpi ops-rise d1" style="--kc:var(--ops-teal-t)"><div class="ops-kl">Total Hours</div><div class="ops-kv"><b>2588</b>:24</div><div class="ops-ks">76 employees</div><div class="ops-kw ops-dn">▼ −1:54 vs last week</div></div>
+      <div class="ops-kpi ops-rise d2" style="--kc:var(--ops-warn)"><div class="ops-kl">Overtime</div><div class="ops-kv"><b>271</b>:49</div><div class="ops-km">≈ $6,116 est. cost</div><div class="ops-kw ops-up">▼ −29:02 · ahorro $653</div></div>
+      <div class="ops-kpi ops-rise d3" style="--kc:var(--ops-aqua-t)"><div class="ops-kl">Active Today</div><div class="ops-kv"><b>13</b></div><div class="ops-ks">selected day</div></div>
+      <div class="ops-kpi ops-rise d4" style="--kc:var(--ops-bad)"><div class="ops-kl">Exceptions</div><div class="ops-kv"><b>20</b></div><div class="ops-ks">17 handled · 3 pending</div></div>
+    </div>
+  </div>
+
+  <!-- ═══ Panels: rows+bars / actions ═══ -->
+  <div class="grid2 demo-sec">
+    <div class="ops-panel ops-water ops-rise">
+      <div class="ops-pt">HOURS BY DEPARTMENT <span class="ops-cnt">.ops-water = destello al hover</span></div>
+      <div class="ops-row"><span class="ops-rname">Fiberglass</span><div class="ops-bar"><i style="width:100%"></i></div><span class="ops-rval">436:47</span></div>
+      <div class="ops-row"><span class="ops-rname">Pre-Plumbing</span><div class="ops-bar"><i style="width:75%"></i></div><span class="ops-rval">330:11</span></div>
+      <div class="ops-row"><span class="ops-rname">Close Up</span><div class="ops-bar"><i style="width:55%"></i></div><span class="ops-rval">242:46</span></div>
+      <div class="ops-row"><span class="ops-rname">SWIM</span><div class="ops-bar"><i style="width:49%"></i></div><span class="ops-rval">213:47</span></div>
+    </div>
+    <div class="ops-panel ops-rise d1">
+      <div class="ops-pt">BUTTONS · click = ripple 💧</div>
+      <div class="btnrow" style="flex-direction:column;align-items:stretch">
+        <button class="ops-btn primary" onclick="OPS.toast('📊 Excel exportado ✓')">📊 Export Excel</button>
+        <button class="ops-btn" onclick="OPS.toast('🚨 OT Watchlist abierto')">🚨 OT Watchlist</button>
+        <button class="ops-btn" onclick="OPS.toast('📱 Messages abierto para Tom')">📱 SMS a Tom</button>
+        <button class="ops-btn copper" onclick="OPS.toast('👤 Buscador de horas listo')">👤 Horas x Empleado</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ Badges ═══ -->
+  <div class="ops-panel demo-sec ops-rise">
+    <div class="ops-pt">STATUS BADGES — fijos en TODO el ecosistema</div>
+    <div class="btnrow">
+      <span class="ops-badge ok">PAID / DONE ✓</span>
+      <span class="ops-badge warn">PENDING / DUE</span>
+      <span class="ops-badge bad">OVERDUE / BLOCKED</span>
+      <span class="ops-badge aqua">EN ROUTE / INFO</span>
+      <span class="ops-badge copper">✅ BILL · $400</span>
+    </div>
+  </div>
+
+  <!-- ═══ Paleta ═══ -->
+  <div class="demo-sec ops-rise">
+    <div class="demo-h">BRAND TOKENS — hex reales de Aspen en el lienzo y elementos grandes</div>
+    <div class="swatches">
+      <div class="sw"><i style="background:#134A63"></i><b>DEEP #134A63</b></div>
+      <div class="sw"><i style="background:#1C8FA8"></i><b>TEAL #1C8FA8</b></div>
+      <div class="sw"><i style="background:#4FC3D9"></i><b>AQUA #4FC3D9</b></div>
+      <div class="sw"><i style="background:#B5733A"></i><b>COPPER #B5733A</b></div>
+      <div class="sw"><i style="background:#0A2433"></i><b>CANVAS (deep −L)</b></div>
+    </div>
+  </div>
+
+  <!-- ═══ Cómo usarlo ═══ -->
+  <div class="ops-panel ops-rise">
+    <div class="ops-pt">CÓMO SE UNE UNA APP AL ECOSISTEMA</div>
+    <div style="font-family:var(--ops-mono);font-size:10.5px;line-height:2;color:var(--ops-text2)">
+      1 · <code>&lt;link rel="stylesheet" href=".../aspen-ops-kit/ops.css"&gt;</code><br>
+      2 · <code>&lt;script src=".../aspen-ops-kit/ops.js" defer&gt;&lt;/script&gt;</code><br>
+      3 · <code>&lt;body class="ops" style="--accent:var(--ops-copper-t)"&gt;</code> ← Invoice = copper · Payroll = aqua · Tickets = ember<br>
+      4 · Componentes: <code>.ops-brief</code> <code>.ops-kpis</code> <code>.ops-panel</code> <code>.ops-btn</code> <code>.ops-badge</code> <code>.ops-waterline</code><br>
+      5 · Efectos gratis: ripple en click · destello <code>.ops-water</code> · reveal <code>.ops-rise</code> · burbujas <code>.ops-bubbles</code> · <code>OPS.toast()</code>
+    </div>
+  </div>
+
+  <div class="ops-sig">ASPEN OPS KIT · LÍNEA DE AGUA · design system by <b>NELA GONZALES</b></div>
+</div>
+
+<script>
+  // demo clock
+  function tick(){
+    const d=new Date();
+    document.getElementById('clock').textContent=d.toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'});
+  }
+  tick(); setInterval(tick,30000);
+</script>
+</body>
+</html>

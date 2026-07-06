@@ -1,0 +1,203 @@
+/* ═══════════════════════════════════════════════════════════════
+   ASPEN OPS KIT · v1.0 — "Línea de Agua" (H.2 Brand True)
+   Design system for the Aspen Spas internal apps ecosystem.
+   Built & designed by Nela Gonzales.
+
+   Usage in any single-file app:
+     <link rel="stylesheet" href="https://aspenservices.github.io/aspen-ops-kit/ops.css">
+     <script src="https://aspenservices.github.io/aspen-ops-kit/ops.js" defer></script>
+
+   Per-app accent (one line is all an app changes):
+     <body style="--accent:var(--ops-aqua)">      Payroll
+     <body style="--accent:var(--ops-copper-t)">  Invoice Tracker
+     <body style="--accent:#F0A84B">              TECH-TICKETS (ember)
+     <body style="--accent:#3ED3C4">              Chemicals
+   ═══════════════════════════════════════════════════════════════ */
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Source+Sans+3:wght@400;500;600&family=IBM+Plex+Mono:wght@300;400;500;600&display=swap');
+
+:root{
+  /* ── Canvas: Deep Blue #134A63 darkened within its own family ── */
+  --ops-bg:#0A2433; --ops-bg2:#0D2B3D;
+  --ops-card:#113344; --ops-card2:#164054; --ops-border:#1E4A60;
+
+  /* ── Aspen brand (true hex) — for LARGE elements ── */
+  --ops-deep:#134A63; --ops-teal:#1C8FA8; --ops-aqua:#4FC3D9; --ops-copper:#B5733A;
+
+  /* ── Text-safe versions (same hue, lifted) — for SMALL text ── */
+  --ops-teal-t:#5FBDD1; --ops-aqua-t:#7DD6E8; --ops-copper-t:#DCA97B;
+
+  /* ── Status (fixed across ALL Aspen tools) ── */
+  --ops-ok:#5FBF95; --ops-warn:#D9AE6E; --ops-bad:#D68877;
+
+  /* ── Ink ── */
+  --ops-text:#E7F0F4; --ops-text2:#A3BCC9; --ops-muted:#5F8095;
+
+  /* ── Type ── */
+  --ops-head:'Poppins',system-ui,sans-serif;
+  --ops-body:'Source Sans 3',system-ui,sans-serif;
+  --ops-mono:'IBM Plex Mono',monospace;
+
+  /* ── Shape & depth ── */
+  --ops-r:14px; --ops-r-sm:10px;
+  --ops-shadow:0 6px 22px rgba(4,18,27,.35);
+
+  /* ── App accent (apps override this) ── */
+  --accent:var(--ops-aqua);
+  --accent-t:var(--ops-aqua-t);
+
+  /* ── Water motion timing ── */
+  --ops-buoy:cubic-bezier(.34,1.4,.5,1);      /* buoyancy: overshoot like floating */
+  --ops-drift:cubic-bezier(.25,.1,.25,1);
+}
+
+/* ═══ Base ═══ */
+*{margin:0;padding:0;box-sizing:border-box}
+body.ops{
+  background:linear-gradient(175deg,var(--ops-bg) 0%,var(--ops-bg2) 100%);
+  color:var(--ops-text);font-family:var(--ops-body);
+  min-height:100vh;overflow-x:hidden;position:relative;
+}
+.ops h1,.ops h2,.ops h3{font-family:var(--ops-head);letter-spacing:-.01em;line-height:1.2}
+.ops a{color:var(--accent-t)}
+
+/* ═══ Header ═══ */
+.ops-hdr{display:flex;align-items:baseline;gap:18px;padding:4px 2px}
+.ops-brand{font-family:var(--ops-head);font-weight:600;font-size:19px;letter-spacing:-.015em;color:var(--ops-text)}
+.ops-brand em{font-style:normal;color:var(--ops-aqua)}
+.ops-role{font-family:var(--ops-mono);font-size:9px;color:var(--ops-muted);letter-spacing:3px;text-transform:uppercase}
+.ops-hdr-right{margin-left:auto;display:flex;align-items:baseline;gap:16px}
+.ops-live{display:flex;align-items:center;gap:7px;font-family:var(--ops-mono);font-size:9.5px;color:var(--ops-ok)}
+.ops-dot{width:6px;height:6px;border-radius:50%;background:var(--ops-ok);animation:ops-pulse 2.4s ease-in-out infinite}
+@keyframes ops-pulse{50%{opacity:.35}}
+.ops-clock{font-family:var(--ops-mono);font-size:15px;font-weight:300;color:var(--ops-text2);letter-spacing:2px}
+
+/* ═══ Waterline (the signature) — container; ops.js injects the SVG ═══ */
+.ops-waterline{position:relative;height:38px;margin:-4px 0 18px;overflow:hidden}
+.ops-waterline svg{position:absolute;inset:0;width:100%;height:100%}
+.ops-wl-surface{fill:none;stroke-width:1.6;filter:drop-shadow(0 2px 8px rgba(79,195,217,.4))}
+.ops-wl-under{opacity:.5}
+.ops-wl-glint{fill:none;stroke:rgba(181,115,58,.6);stroke-width:1;stroke-linecap:round;stroke-dasharray:2 46;animation:ops-glint 7s linear infinite}
+@keyframes ops-glint{to{stroke-dashoffset:-96}}
+
+/* ═══ Executive Briefing ═══ */
+.ops-brief{
+  background:linear-gradient(120deg,rgba(181,115,58,.09),transparent 60%);
+  border:1px solid rgba(181,115,58,.25);border-left:3px solid var(--ops-copper);
+  border-radius:4px var(--ops-r) var(--ops-r) 4px;padding:20px 24px;margin-bottom:20px;
+}
+.ops-brief-t{font-family:var(--ops-mono);font-size:9px;font-weight:500;letter-spacing:3px;text-transform:uppercase;color:var(--ops-copper-t);margin-bottom:10px;display:flex;gap:10px;align-items:center}
+.ops-brief-t .ops-ai{color:var(--ops-muted);margin-left:auto;letter-spacing:1px}
+.ops-brief-b{font-size:15.5px;line-height:1.7;max-width:860px}
+.ops-brief-b b{font-weight:600}
+.ops-brief-b b.g{color:var(--ops-ok)} .ops-brief-b b.c{color:var(--ops-copper-t)} .ops-brief-b b.q{color:var(--ops-aqua-t)} .ops-brief-b b.r{color:var(--ops-bad)}
+
+/* ═══ KPI strip ═══ */
+.ops-kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(196px,1fr));gap:1px;background:var(--ops-border);border:1px solid var(--ops-border);border-radius:var(--ops-r);overflow:hidden;margin-bottom:20px}
+.ops-kpi{background:var(--ops-card);padding:20px 20px 16px;position:relative;transition:background .3s var(--ops-drift)}
+.ops-kpi:hover{background:var(--ops-card2)}
+.ops-kpi::after{content:'';position:absolute;bottom:0;left:20px;right:20px;height:2px;border-radius:2px;background:var(--kc,var(--accent-t));opacity:0;transition:opacity .3s}
+.ops-kpi:hover::after{opacity:.7}
+.ops-kl{font-family:var(--ops-mono);font-size:8.5px;font-weight:500;letter-spacing:2px;text-transform:uppercase;color:var(--ops-muted);margin-bottom:11px}
+.ops-kv{font-family:var(--ops-head);font-size:31px;font-weight:300;line-height:1;color:var(--ops-text);letter-spacing:-.01em}
+.ops-kv b{font-weight:600;color:var(--kc,var(--accent-t))}
+.ops-ks{font-size:11px;color:var(--ops-muted);margin-top:8px}
+.ops-km{font-family:var(--ops-mono);font-size:10px;color:var(--ops-copper-t);margin-top:4px}
+.ops-kw{font-family:var(--ops-mono);font-size:9px;margin-top:4px}
+.ops-up{color:var(--ops-ok)} .ops-dn{color:var(--ops-bad)}
+
+/* ═══ Panels & rows ═══ */
+.ops-panel{background:var(--ops-card);border:1px solid var(--ops-border);border-radius:var(--ops-r);padding:17px 20px;box-shadow:var(--ops-shadow)}
+.ops-pt{font-family:var(--ops-mono);font-size:9px;font-weight:500;letter-spacing:2.5px;text-transform:uppercase;color:var(--ops-muted);margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.ops-pt .ops-cnt{margin-left:auto;letter-spacing:1px}
+.ops-row{display:flex;align-items:center;gap:12px;padding:10px 4px;border-bottom:1px solid rgba(30,74,96,.5);transition:background .25s,padding-left .25s}
+.ops-row:last-child{border-bottom:none}
+.ops-row:hover{background:rgba(79,195,217,.04);padding-left:8px}
+.ops-rname{font-size:13px;flex:1;min-width:130px}
+.ops-rsub{font-family:var(--ops-mono);font-size:9px;color:var(--ops-muted);margin-top:2px}
+.ops-rval{font-family:var(--ops-mono);font-size:11.5px;color:var(--ops-text2);min-width:52px;text-align:right}
+
+/* ═══ Dept bar (brand gradient teal→aqua) ═══ */
+.ops-bar{flex:1.2;height:5px;background:rgba(255,255,255,.05);border-radius:3px;overflow:hidden}
+.ops-bar i{display:block;height:100%;border-radius:3px;background:linear-gradient(90deg,var(--ops-teal),var(--ops-aqua));transform-origin:left;animation:ops-fill 1.1s var(--ops-drift) both}
+@keyframes ops-fill{from{transform:scaleX(0)}}
+
+/* ═══ Badges (status fixed ecosystem-wide) ═══ */
+.ops-badge{font-family:var(--ops-mono);font-size:8.5px;font-weight:600;padding:4px 10px;border-radius:11px;border:1px solid;letter-spacing:.5px;white-space:nowrap}
+.ops-badge.ok{background:rgba(95,191,149,.1);border-color:rgba(95,191,149,.35);color:var(--ops-ok)}
+.ops-badge.warn{background:rgba(217,174,110,.1);border-color:rgba(217,174,110,.35);color:var(--ops-warn)}
+.ops-badge.bad{background:rgba(214,136,119,.1);border-color:rgba(214,136,119,.35);color:var(--ops-bad)}
+.ops-badge.aqua{background:rgba(79,195,217,.1);border-color:rgba(79,195,217,.35);color:var(--ops-aqua-t)}
+.ops-badge.copper{background:rgba(181,115,58,.12);border-color:rgba(181,115,58,.4);color:var(--ops-copper-t)}
+
+/* ═══ Buttons — buoyant + ripple-ready ═══ */
+.ops-btn{
+  font-family:var(--ops-head);font-size:11.5px;font-weight:600;padding:9px 17px;
+  border-radius:var(--ops-r-sm);cursor:pointer;border:1px solid var(--ops-border);
+  background:var(--ops-card2);color:var(--ops-text2);
+  transition:transform .35s var(--ops-buoy),border-color .25s,color .25s,box-shadow .25s;
+  position:relative;overflow:hidden;   /* ripple lives inside */
+}
+.ops-btn:hover{transform:translateY(-2px);border-color:var(--accent);color:var(--accent-t);box-shadow:0 6px 18px rgba(4,18,27,.35)}
+.ops-btn:active{transform:translateY(0) scale(.98)}
+.ops-btn.primary{background:var(--ops-teal);border-color:var(--ops-teal);color:#fff}
+.ops-btn.primary:hover{background:var(--ops-aqua);border-color:var(--ops-aqua);color:#06222E}
+.ops-btn.copper{background:rgba(181,115,58,.14);border-color:rgba(181,115,58,.4);color:var(--ops-copper-t)}
+
+/* ═══ WATER EFFECT: ripple (injected by ops.js on click) ═══ */
+.ops-ripple-wave{
+  position:absolute;border-radius:50%;pointer-events:none;
+  background:radial-gradient(circle,rgba(79,195,217,.35) 0%,rgba(79,195,217,.12) 45%,transparent 70%);
+  transform:translate(-50%,-50%) scale(0);
+  animation:ops-ripple .7s var(--ops-drift) forwards;
+}
+@keyframes ops-ripple{to{transform:translate(-50%,-50%) scale(1);opacity:0}}
+
+/* ═══ WATER EFFECT: surface (cards get a caustic sheen crossing on hover) ═══ */
+.ops-water{position:relative;overflow:hidden}
+.ops-water::before{
+  content:'';position:absolute;top:-60%;left:-30%;width:45%;height:220%;
+  background:linear-gradient(100deg,transparent,rgba(125,214,232,.06) 45%,rgba(125,214,232,.11) 50%,rgba(125,214,232,.06) 55%,transparent);
+  transform:rotate(12deg) translateX(-140%);transition:transform 1.1s var(--ops-drift);
+  pointer-events:none;
+}
+.ops-water:hover::before{transform:rotate(12deg) translateX(420%)}
+
+/* ═══ WATER EFFECT: surface rise (elements enter like emerging from water) ═══ */
+.ops-rise{opacity:0;transform:translateY(18px)}
+.ops-rise.in{opacity:1;transform:translateY(0);transition:opacity .8s var(--ops-drift),transform .9s var(--ops-buoy)}
+.ops-rise.d1{transition-delay:.08s}.ops-rise.d2{transition-delay:.16s}.ops-rise.d3{transition-delay:.24s}.ops-rise.d4{transition-delay:.32s}
+
+/* ═══ WATER EFFECT: bubbles (ambient, optional — <div class="ops-bubbles"> ) ═══ */
+.ops-bubbles{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+.ops-bubble{
+  position:absolute;bottom:-24px;border-radius:50%;
+  background:radial-gradient(circle at 32% 30%,rgba(125,214,232,.28),rgba(79,195,217,.07) 60%,transparent);
+  animation:ops-bubble-rise linear infinite;
+}
+@keyframes ops-bubble-rise{
+  0%{transform:translateY(0) translateX(0);opacity:0}
+  8%{opacity:.7}
+  92%{opacity:.5}
+  100%{transform:translateY(-108vh) translateX(var(--sway,14px));opacity:0}
+}
+
+/* ═══ Toast ═══ */
+.ops-toast{
+  position:fixed;bottom:26px;left:50%;transform:translateX(-50%) translateY(16px);opacity:0;
+  background:rgba(17,51,68,.92);backdrop-filter:blur(14px);border:1px solid var(--ops-border);
+  border-radius:14px;padding:12px 22px;font-size:12.5px;color:var(--ops-text);
+  box-shadow:0 12px 40px rgba(4,18,27,.5);z-index:400;
+  transition:opacity .45s var(--ops-drift),transform .55s var(--ops-buoy);
+}
+.ops-toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+/* ═══ Signature footer ═══ */
+.ops-sig{font-family:var(--ops-mono);font-size:9px;color:var(--ops-muted);text-align:center;margin-top:24px;letter-spacing:1.5px}
+.ops-sig b{color:var(--ops-copper-t)}
+
+/* ═══ Accessibility: respect reduced motion ═══ */
+@media (prefers-reduced-motion: reduce){
+  .ops *,.ops *::before,.ops *::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+  .ops-rise{opacity:1;transform:none}
+}
